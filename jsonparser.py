@@ -31,12 +31,12 @@ for item in data:
             "Tailoring": "TAILORING" in item["skills"] ##
         },
 
-        "durrability": item["itemIDs"]["dura"], ##
-        "str": {"min": getVal(item, ["str", "minimum"]), "max": getVal(item, ["str", "maximum"])}, ##
-        "int": {"min": getVal(item, ["int", "minimum"]), "max": getVal(item, ["int", "maximum"])}, ##
-        "agi": {"min": getVal(item, ["agi", "minimum"]), "max": getVal(item, ["agi", "maximum"])}, ##
-        "def": {"min": getVal(item, ["def", "minimum"]), "max": getVal(item, ["def", "maximum"])}, ##
-        "dex": {"min": getVal(item, ["dex", "minimum"]), "max": getVal(item, ["dex", "maximum"])}, ##
+        "durrability": max(getVal(item, ["itemIDs", "dura"]), getVal(item, ["consumableIDs", "dura"])) , ##
+        "str": {"min": getVal(item, ["ids", "str", "minimum"]), "max": getVal(item, ["ids", "str", "maximum"])}, ##
+        "int": {"min": getVal(item, ["ids", "int", "minimum"]), "max": getVal(item, ["ids", "int", "maximum"])}, ##
+        "agi": {"min": getVal(item, ["ids", "agi", "minimum"]), "max": getVal(item, ["ids", "agi", "maximum"])}, ##
+        "def": {"min": getVal(item, ["ids", "def", "minimum"]), "max": getVal(item, ["ids", "def", "maximum"])}, ##
+        "dex": {"min": getVal(item, ["ids", "dex", "minimum"]), "max": getVal(item, ["ids", "dex", "maximum"])}, ##
 
         "strReq": item["itemIDs"]["strReq"],
         "intReq": item["itemIDs"]["intReq"],
@@ -114,19 +114,20 @@ for item in data:
             "def": {"min": 0, "max":0}
         },
 
-        "poision": {"min": 0, "max":0},
+        "poision": {"min": getVal(item, ["ids", "poison", "minimum"]), "max":getVal(item, ["ids", "poison", "maximum"])}, ##
         "spellDam": {"min": 0, "max":0},
         "spellDam%": {"min": 0, "max":0},
-        "manaSteal": {"min": 0, "max":0},
-        "manaReg": {"min": 0, "max":0},
-        "healthReg": {"min": 0, "max":0},
-        "helthReg%": {"min": 0, "max":0},
+        "manaSteal": {"min": getVal(item, ["ids", "ms", "minimum"]), "max":getVal(item, ["ids", "ms", "maximum"])}, ##
+        "manaReg": {"min": getVal(item, ["ids", "mr", "minimum"]), "max":getVal(item, ["ids", "mr", "maximum"])}, ##
+        "healthReg": {"min": getVal(item, ["ids", "hprRaw", "minimum"]), "max":getVal(item, ["ids", "hprRaw", "maximum"])}, ##
+        "helthReg%": {"min": getVal(item, ["ids", "hprPct", "minimum"]), "max":getVal(item, ["ids", "hprPct", "maximum"])}, ##
         "health": {"min": 0, "max":0},
-        "LifeSteal": {"min": 0, "max":0},
-        "walkSpd": {"min": 0, "max":0},
-        "sprintReg": {"min": 0, "max":0},
-        "jumpHight": {"min": 0, "max":0},
-        "sprint": {"min": 0, "max":0},
+        "LifeSteal": {"min": getVal(item, ["ids", "ls", "minimum"]), "max":getVal(item, ["ids", "ls", "maximum"])}, ##
+        "walkSpd": {"min": getVal(item, ["ids", "wSdRaw", "minimum"]), "max":getVal(item, ["ids", "wSdRaw", "maximum"])}, ##
+        "walkSpd%": {"min": getVal(item, ["ids", "wSdPct", "minimum"]), "max":getVal(item, ["ids", "wSdPct", "maximum"])}, ##
+        "sprintReg": {"min": getVal(item, ["ids", "spritReg", "minimum"]), "max":getVal(item, ["ids", "spritReg", "maximum"])},
+        "jumpHight": {"min": getVal(item, ["ids", "jh", "minimum"]), "max":getVal(item, ["ids", "jh", "maximum"])},
+        "sprint": {"min": getVal(item, ["ids", "sprit", "minimum"]), "max":getVal(item, ["ids", "sprit", "maximum"])},
 
         "1stSpellCost": {"min": 0, "max":0},
         "1stSpellCost%": {"min": 0, "max":0},
@@ -137,7 +138,7 @@ for item in data:
         "4thSpellCost": {"min": 0, "max":0},
         "4thSpellCost%": {"min": 0, "max":0},
 
-        "lootBonus": {"min": 0, "max":0},
+        "lootBonus": {"min": getVal(item, ["ids", "lb", "minimum"]), "max":getVal(item, ["ids", "lb", "maximum"])},
         "xpBonus": {"min": 0, "max":0},
         "stealing": {"min": 0, "max":0},
         "lootQualty": {"min": 0, "max":0},
