@@ -32,17 +32,17 @@ for item in data:
         },
 
         "durrability": item["itemIDs"]["dura"], ##
-        "str": {"min": getVal(item, ["str", "minimum"]), "max": getVal(item, ["str", "maximum"])},
-        "int": {"min": getVal(item, ["int", "minimum"]), "max": getVal(item, ["int", "maximum"])},
-        "agi": {"min": getVal(item, ["agi", "minimum"]), "max": getVal(item, ["agi", "maximum"])},
-        "def": {"min": getVal(item, ["def", "minimum"]), "max": getVal(item, ["def", "maximum"])},
-        "dex": {"min": getVal(item, ["dex", "minimum"]), "max": getVal(item, ["dex", "maximum"])},
+        "str": {"min": getVal(item, ["str", "minimum"]), "max": getVal(item, ["str", "maximum"])}, ##
+        "int": {"min": getVal(item, ["int", "minimum"]), "max": getVal(item, ["int", "maximum"])}, ##
+        "agi": {"min": getVal(item, ["agi", "minimum"]), "max": getVal(item, ["agi", "maximum"])}, ##
+        "def": {"min": getVal(item, ["def", "minimum"]), "max": getVal(item, ["def", "maximum"])}, ##
+        "dex": {"min": getVal(item, ["dex", "minimum"]), "max": getVal(item, ["dex", "maximum"])}, ##
 
-        "strReq": 0,
-        "intReq": 0,
-        "agiReq": 0,
-        "defReq": 0,
-        "dexReq": 0,
+        "strReq": item["itemIDs"]["strReq"],
+        "intReq": item["itemIDs"]["intReq"],
+        "agiReq": item["itemIDs"]["agiReq"],
+        "defReq": item["itemIDs"]["defReq"],
+        "dexReq": item["itemIDs"]["dexReq"],
 
         "earth":{
             "dam": {"min": 0, "max":0},
