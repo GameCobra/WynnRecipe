@@ -1,6 +1,6 @@
 import json
 
-newData = []
+newData = {"ingredients": []}
 
 with open('original.json', 'r') as file:
     data = json.load(file)
@@ -161,7 +161,7 @@ for item in data:
         "thorns": {"min": getVal(item, ["ids", "thorns", "minimum"]), "max":getVal(item, ["ids", "thorns", "maximum"])}, ##
         "atkSpd": {"min": getVal(item, ["ids", "atkTier", "minimum"]), "max":getVal(item, ["ids", "atkTier", "maximum"])} ##
     }
-    newData.append(newItem)
+    newData["ingredients"].append(newItem)
 
 #print(newData[0]["skills"])
 # Serializing json

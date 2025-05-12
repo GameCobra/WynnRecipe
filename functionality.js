@@ -11,10 +11,12 @@ onclick = function(e){
   }
 */
 
-function parseIngredients()
+async function parseIngredients()
 {
-    fetch('https://gamecobra.github.io/wynncraft-crafter/ingredients.json')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-    //const obj = JSON.parse(text);
+    let x = await fetch('https://gamecobra.github.io/wynncraft-crafter/ingredients.json');
+    //fetch('https://gamecobra.github.io/wynncraft-crafter/ingredients.json')
+    //.then((response) => response.json())
+    //.then((json) => obj = json);
+    //obj = JSON.parse(response);
+    console.log(JSON.parse(x).ingredients[0].name);
 }
