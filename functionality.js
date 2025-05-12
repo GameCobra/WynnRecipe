@@ -5,6 +5,11 @@ function myFunction() {
 function notMyFunction() {
     document.getElementById("demo").innerHTML = "Paragraph NOT changed.";
 }
+/*
+onclick = function(e){
+    console.log("mouse location:", e.clientX, e.clientY)
+  }
+*/
 
 function Person(first = "a", last, age, eye) {
     this.firstName = first;

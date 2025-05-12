@@ -100,23 +100,25 @@ for item in data:
         },
         
         "elemental":{
-            "dam": {"min": 0, "max":0},
-            "dam%": {"min": 0, "max":0},
-            "mainDam": {"min": 0, "max":0},
-            "mainDam%": {"min": 0, "max":0},
-            "spellDam": {"min": 0, "max":0},
-            "spellDam%": {"min": 0, "max":0},
-            "def": {"min": 0, "max":0}
+            "dam": {"min": getVal(item, ["ids", "rDamRaw", "minimum"]), "max": getVal(item, ["ids", "rDamRaw", "maximum"])}, ##
+            "dam%": {"min": getVal(item, ["ids", "rDamPct", "minimum"]), "max": getVal(item, ["ids", "rDamPct", "maximum"])}, ##
+            "meleeDam": {"min": getVal(item, ["ids", "rMdRaw", "minimum"]), "max": getVal(item, ["ids", "rMdRaw", "maximum"])}, ##
+            "meleeDam%": {"min": getVal(item, ["ids", "rMdPct", "minimum"]), "max": getVal(item, ["ids", "rMdPct", "maximum"])}, ##
+            "spellDam": {"min": getVal(item, ["ids", "rSpDamRaw", "minimum"]), "max": getVal(item, ["ids", "rSpDamRaw", "maximum"])}, ##
+            "spellDam%": {"min": getVal(item, ["ids", "rSpDamPct", "minimum"]), "max": getVal(item, ["ids", "rSpDamPct", "maximum"])}, ##
+            "def": {"min": getVal(item, ["ids", "rDefRaw", "minimum"]), "max": getVal(item, ["ids", "rDefRaw", "maximum"])}, ##
+            "def%": {"min": getVal(item, ["ids", "rDefPct", "minimum"]), "max": getVal(item, ["ids", "rDefPct", "maximum"])}, ##
         },
         
         "neutral":{
-            "dam": {"min": 0, "max":0},
-            "dam%": {"min": 0, "max":0},
-            "mainDam": {"min": 0, "max":0},
-            "mainDam%": {"min": 0, "max":0},
-            "spellDam": {"min": 0, "max":0},
-            "spellDam%": {"min": 0, "max":0},
-            "def": {"min": 0, "max":0}
+            "dam": {"min": getVal(item, ["ids", "nDamRaw", "minimum"]), "max": getVal(item, ["ids", "nDamRaw", "maximum"])}, ##
+            "dam%": {"min": getVal(item, ["ids", "nDamPct", "minimum"]), "max": getVal(item, ["ids", "nDamPct", "maximum"])}, ##
+            "meleeDam": {"min": getVal(item, ["ids", "nMdRaw", "minimum"]), "max": getVal(item, ["ids", "nMdRaw", "maximum"])}, ##
+            "meleeDam%": {"min": getVal(item, ["ids", "nMdPct", "minimum"]), "max": getVal(item, ["ids", "nMdPct", "maximum"])}, ##
+            "spellDam": {"min": getVal(item, ["ids", "nSpDamRaw", "minimum"]), "max": getVal(item, ["ids", "nSpDamRaw", "maximum"])}, ##
+            "spellDam%": {"min": getVal(item, ["ids", "nSpDamPct", "minimum"]), "max": getVal(item, ["ids", "nSpDamPct", "maximum"])}, ##
+            "def": {"min": getVal(item, ["ids", "nDefRaw", "minimum"]), "max": getVal(item, ["ids", "nDefRaw", "maximum"])}, ##
+            "def%": {"min": getVal(item, ["ids", "nDefPct", "minimum"]), "max": getVal(item, ["ids", "nDefPct", "maximum"])}, ##
         },
 
         "poision": {"min": getVal(item, ["ids", "poison", "minimum"]), "max":getVal(item, ["ids", "poison", "maximum"])}, ##
