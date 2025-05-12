@@ -163,4 +163,10 @@ for item in data:
     }
     newData.append(newItem)
 
-print(newData[0]["skills"])
+#print(newData[0]["skills"])
+# Serializing json
+json_object = json.dumps(newData, indent=4)
+ 
+# Writing to sample.json
+with open("ingredients.json", "w") as outfile:
+    outfile.write(json_object)
