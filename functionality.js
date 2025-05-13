@@ -3,7 +3,7 @@ function myFunction() {
 }
 
 function notMyFunction() {
-    document.getElementById("demo").innerHTML = "Paragraph NOT changed.";
+    document.getElementById("ingredient").innerHTML = "<option value='7'>7</option><option value='B'>B</option><option value='C'>C</option>";
 }
 /*
 onclick = function(e){
