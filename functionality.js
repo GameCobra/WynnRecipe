@@ -11,12 +11,8 @@ onclick = function(e){
   }
 */
 
-async function parseIngredients()
-{
-    let x = await fetch('https://gamecobra.github.io/wynncraft-crafter/ingredients.json');
-    //fetch('https://gamecobra.github.io/wynncraft-crafter/ingredients.json')
-    //.then((response) => response.json())
-    //.then((json) => obj = json);
-    //obj = JSON.parse(response);
-    console.log(JSON.parse(x).ingredients[0].name);
+async function parseIngredients() {
+    let response = await fetch('https://gamecobra.github.io/wynncraft-crafter/ingredients.json');
+    let data = await response.json(); 
+    console.log(data.ingredients[0].name); 
 }
