@@ -1,3 +1,21 @@
+const hide = (Event) => {
+    const dropdown = document.getElementById("dropdown");
+    const clickObject = document.getElementById("Box");
+    console.log(Event.target);
+    if (Event.target !== clickObject) {
+        // The object was not clicked
+        //console.log('Object not clicked');
+        trueHide();
+    }
+
+};
+
+function trueHide()
+{
+    if (!dropdown.classList.contains("hide")) {
+        dropdown.classList.add("hide");
+    }
+}
 
 const show = () => {
     const dropdown = document.getElementById("dropdown");
@@ -8,6 +26,12 @@ function textupdate()
 {
     const box = document.getElementById("Box");
     console.log(box.value);
+    show();
+    if (box.value == "")
+    {
+        trueHide();
+    }
+        
 }
 
 
@@ -16,7 +40,7 @@ const inputLocation = document.querySelector("#inputBox");
 
 const inputBox = document.createElement("input");
 inputBox.id = "Box";
-inputBox.addEventListener("mousedown", show);
+inputBox.addEventListener("mousedown", textupdate);
 inputBox.addEventListener("input", textupdate)
 
 inputLocation.appendChild(inputBox);
@@ -31,18 +55,5 @@ inputLocation.appendChild(holder);
 
 document.getElementById("Box").value = "Johnny Bravo";
 
-document.addEventListener("mousedown", function(event) {
-    const dropdown = document.getElementById("dropdown");
-    const clickObject = document.getElementById("Box");
-    console.log(event.target);
-    if (event.target !== clickObject) {
-        // The object was not clicked
-        console.log('Object not clicked');
-        // Perform actions here, e.g., hide a menu, reset a state, etc.
-      
-    if (!dropdown.classList.contains("hide")) {
-        dropdown.classList.add("hide");
-      }
-    }
+document.addEventListener("mousedown", hide);
 
-});
