@@ -84,6 +84,8 @@
     const structure = document.createElement("div");
     structure.classList.add("structure", "hide");
   
+    
+
     users.forEach(user => {
       const {
         id,

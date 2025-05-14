@@ -12,6 +12,7 @@ const hide = (Event) => {
 
 function trueHide()
 {
+    const dropdown = document.getElementById("dropdown");
     if (!dropdown.classList.contains("hide")) {
         dropdown.classList.add("hide");
     }
@@ -35,6 +36,13 @@ function textupdate()
 }
 
 
+async function parseIngredients() {
+    let response = await fetch('https://gamecobra.github.io/WynnRecipe/ingredients.json');
+    let data = await response.json(); 
+    return data; 
+}
+
+
 const inputLocation = document.querySelector("#inputBox");
 
 
@@ -46,11 +54,23 @@ inputBox.addEventListener("input", textupdate)
 inputLocation.appendChild(inputBox);
 
 const holder = document.createElement("div");
-holder.innerHTML = "Bob";
 holder.id = "dropdown";
 holder.classList.add("structure");
 
+const ings = parseIngredients().then(
+response => {
+
+    for (let i = 0; i < response.ingredients.length; i++) {
+
+    const Person = document.createElement("div");
+    Person.innerHTML = response.ingredients[i].name;
+    holder.appendChild(Person);
+    }
+});
+
+
 inputLocation.appendChild(holder);
+
 
 
 document.getElementById("Box").value = "Johnny Bravo";
