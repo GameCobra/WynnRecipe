@@ -1,12 +1,25 @@
 
-const hide = () => {
+const show = () => {
     const dropdown = document.getElementById("dropdown");
     dropdown.classList.remove("hide");
 };
 
+function textupdate()
+{
+    const box = document.getElementById("Box");
+    console.log(box.value);
+}
 
 
 const inputLocation = document.querySelector("#inputBox");
+
+
+const inputBox = document.createElement("input");
+inputBox.id = "Box";
+inputBox.addEventListener("mousedown", show);
+inputBox.addEventListener("input", textupdate)
+
+inputLocation.appendChild(inputBox);
 
 const holder = document.createElement("div");
 holder.innerHTML = "Bob";
@@ -15,12 +28,8 @@ holder.classList.add("structure");
 
 inputLocation.appendChild(holder);
 
-const inputBox = document.createElement("input");
-inputBox.id = "Box";
-inputBox.addEventListener("mousedown", hide);
 
-inputLocation.appendChild(inputBox);
-
+document.getElementById("Box").value = "Johnny Bravo";
 
 document.addEventListener("mousedown", function(event) {
     const dropdown = document.getElementById("dropdown");
