@@ -1,15 +1,32 @@
 
 const hide = () => {
-    const dropdown = document.querySelector(".structure");
-    if (dropdown.classList.contains("hide")) {
-        dropdown.classList.remove("hide");
-      }
+    const dropdown = document.getElementById("dropdown");
+    dropdown.classList.remove("hide");
 };
 
 
-document.addEventListener("click", function(event) {
-    const dropdown = document.querySelector(".structure");
-    if (event.target !== dropdown) {
+
+const inputLocation = document.querySelector("#inputBox");
+
+const holder = document.createElement("div");
+holder.innerHTML = "Bob";
+holder.id = "dropdown";
+holder.classList.add("structure");
+
+inputLocation.appendChild(holder);
+
+const inputBox = document.createElement("input");
+inputBox.id = "Box";
+inputBox.addEventListener("mousedown", hide);
+
+inputLocation.appendChild(inputBox);
+
+
+document.addEventListener("mousedown", function(event) {
+    const dropdown = document.getElementById("dropdown");
+    const clickObject = document.getElementById("Box");
+    console.log(event.target);
+    if (event.target !== clickObject) {
         // The object was not clicked
         console.log('Object not clicked');
         // Perform actions here, e.g., hide a menu, reset a state, etc.
@@ -20,18 +37,3 @@ document.addEventListener("click", function(event) {
     }
 
 });
-
-
-const inputLocation = document.querySelector("#inputBox");
-
-const holder = document.createElement("div");
-holder.innerHTML = "Bob";
-holder.classList.add("structure");
-
-const inputBox = document.createElement("input");
-inputBox.id = "Box";
-inputBox.addEventListener("click", drop(event));
-
-inputLocation.appendChild(inputBox);
-inputLocation.appendChild(holder);
-
