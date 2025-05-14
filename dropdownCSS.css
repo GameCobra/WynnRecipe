@@ -4,31 +4,16 @@
     margin: 0;
     box-sizing: border-box;
   }
-  
-  :root {
-    --colorPrimaryDark: #0b132b;
-    --colorPrimaryLight: #494f61;
-    --colorPlaceholder: #9b9fa8;
-    --colorBackground: #eeeff0;
-    --colorBorder: #cdcfd3;
-    --colorAccent: #003bde;
-    --gutter: 0 16px;
-    --border: 1.5px solid var(--colorBorder);
-    --radius: 3px;
-  }
-  
-  h5,
-  p {
-    font-family: "Lato";
-    font-size: 14px;
-  }
-  
-  #content {
+  #Box,
+  #content,
+  #inputBox {
     display: flex;
     justify-content: center;
+    place-self: center;
     align-items: flex-start;
-    height: 100vh;
-    width: 100vw;
+    display:block;
+    height: 10%;
+    width: 50%;
     background-color: var(--colorBackground);
   }
   
@@ -38,11 +23,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    place-self: center;
     border: var(--border);
     border-radius: var(--radius);
     height: 36px;
     width: 280px;
-    margin-top: 100px;
+    margin-top: 10px;
     padding: var(--gutter);
     background-color: white;
   }
@@ -78,6 +64,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    place-self: center;
     height: 200px;
     width: 280px;
     overflow: scroll;
