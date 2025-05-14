@@ -67,7 +67,7 @@
     place-self: center;
     height: 200px;
     width: 280px;
-    overflow: scroll;
+    overflow-y: scroll;
     background-color: white;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
     padding: 10px 0;
@@ -82,7 +82,7 @@
   
   .structure>div:hover {
     background-color: var(--colorAccent);
-    color: white;
+    color: rgb(163, 163, 163);
     cursor: pointer;
   }
   

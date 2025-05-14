@@ -1,10 +1,9 @@
-const hide = (Event) => {
+//Triggers when 
+const onDocumentClick = (Event) => {
     const dropdown = document.getElementById("dropdown");
     const clickObject = document.getElementById("Box");
-    console.log(Event.target);
-    if (Event.target !== clickObject) {
-        // The object was not clicked
-        //console.log('Object not clicked');
+    //console.log(Event.target);
+    if (Event.target !== clickObject && Event.target !== dropdown ) {
         trueHide();
     }
 
@@ -42,16 +41,18 @@ async function parseIngredients() {
     return data; 
 }
 
+function CreatePropertyInputBox()
+{
+    const inputBox = document.createElement("input");
+    inputBox.id = "Box";
+    inputBox.addEventListener("mousedown", textupdate);
+    inputBox.addEventListener("input", textupdate)
+    return inputBox;
+}
 
 const inputLocation = document.querySelector("#inputBox");
 
-
-const inputBox = document.createElement("input");
-inputBox.id = "Box";
-inputBox.addEventListener("mousedown", textupdate);
-inputBox.addEventListener("input", textupdate)
-
-inputLocation.appendChild(inputBox);
+inputLocation.appendChild(CreatePropertyInputBox());
 
 const holder = document.createElement("div");
 holder.id = "dropdown";
@@ -64,6 +65,7 @@ response => {
 
     const Person = document.createElement("div");
     Person.innerHTML = response.ingredients[i].name;
+    Person.classList.remove("hide");
     holder.appendChild(Person);
     }
 });
@@ -75,5 +77,5 @@ inputLocation.appendChild(holder);
 
 document.getElementById("Box").value = "Johnny Bravo";
 
-document.addEventListener("mousedown", hide);
+document.addEventListener("mousedown", onDocumentClick);
 
