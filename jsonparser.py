@@ -1,3 +1,4 @@
+#Use json file from: https://github.com/wynnbuilder/wynnbuilder.github.io/blob/master/ingreds_clean.json
 import json
 
 newData = {"ingredients": []}

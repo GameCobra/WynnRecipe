@@ -1,3 +1,4 @@
+//Based on: https://medium.com/@kyleducharme/developing-custom-dropdowns-with-vanilla-js-css-in-under-5-minutes-e94a953cee75  
 function GetFirstChildWithClass(element, className)
 {
     const childrenList = element.children;
@@ -88,6 +89,7 @@ function CreateSearchDropdown()
     holder.id = "dropdown";
     holder.classList.add("SearchDropdown")
     holder.classList.add("structure");
+    holder.classList.add("hide");
     
     const ings = parseIngredients().then(
     response => {
