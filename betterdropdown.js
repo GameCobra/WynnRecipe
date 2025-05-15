@@ -1,10 +1,27 @@
-//Triggers when 
+function GetFirstChildWithClass(element, className)
+{
+    const collection = element.children;
+    for (let i = 0; i < collection.length; i++)
+    {
+        if (collection[i].classList.contains(className))
+        {
+            return collection[i];
+        }
+    }
+    return null;
+}
+
+//Triggers when the document is clicked 
 const onDocumentClick = (Event) => {
-    const dropdown = document.getElementById("dropdown");
-    const clickObject = document.getElementById("InputBox");
-    //console.log(Event.target);
-    if (Event.target !== clickObject && Event.target !== dropdown ) {
-        trueHide();
+    //const dropdown = document.getElementById("dropdown");
+    //const clickObject = document.getElementById("InputBox");
+    
+    const collection = document.getElementsByClassName("SearchDropdown");
+    for (let i = 0; i < collection.length; i++)
+    {
+        if (Event.target !== collection[i] && Event.target !== GetFirstChildWithClass(collection[i].parentElement, "IngredientInputBox")) {
+            hide(collection[i]);
+        }
     }
 
 };
@@ -15,9 +32,14 @@ function trueHide()
     //const dropdown = document.getElementById("dropdown");
     for (let i = 0; i < collection.length; i++)
     {
-        if (!collection[i].classList.contains("hide")) {
-            collection[i].classList.add("hide");
-        }
+        hide(collection[i]);
+    }
+}
+
+function hide(element)
+{
+    if (!element.classList.contains("hide")) {
+        element.classList.add("hide");
     }
 }
 
