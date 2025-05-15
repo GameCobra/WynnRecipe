@@ -1,17 +1,18 @@
 function GetFirstChildWithClass(element, className)
 {
-    const collection = element.children;
-    for (let i = 0; i < collection.length; i++)
+    const childrenList = element.children;
+
+    //will find the first element in childrenList with the given class and returns it
+    for (let i = 0; i < childrenList.length; i++)
     {
-        if (collection[i].classList.contains(className))
+        if (childrenList[i].classList.contains(className))
         {
-            return collection[i];
+            return childrenList[i];
         }
     }
     return null;
 }
 
-//Triggers when the document is clicked 
 const onDocumentClick = (Event) => {
     //const dropdown = document.getElementById("dropdown");
     //const clickObject = document.getElementById("InputBox");
@@ -19,24 +20,23 @@ const onDocumentClick = (Event) => {
     const collection = document.getElementsByClassName("SearchDropdown");
     for (let i = 0; i < collection.length; i++)
     {
+        //hides all collection elements that were not clicked and did not have their input box clicked
         if (Event.target !== collection[i] && Event.target !== GetFirstChildWithClass(collection[i].parentElement, "IngredientInputBox")) {
-            hide(collection[i]);
+            HideElement(collection[i]);
         }
     }
-
 };
 
-function trueHide()
+function HideAllSearchDropdowns()
 {
     const collection = document.getElementsByClassName("SearchDropdown");
-    //const dropdown = document.getElementById("dropdown");
     for (let i = 0; i < collection.length; i++)
     {
-        hide(collection[i]);
+        HideElement(collection[i]);
     }
 }
 
-function hide(element)
+function HideElement(element)
 {
     if (!element.classList.contains("hide")) {
         element.classList.add("hide");
@@ -51,18 +51,16 @@ function textupdate(Event)
 {
     //const box = document.getElementById("InputBox");
     //console.log(Event.target.value);
-    for (let i = 0; i < Event.target.parentElement.children.length; i++)
+    const drop = GetFirstChildWithClass(Event.target.parentElement, "SearchDropdown");
+    console.log(Event.target);
+    if (drop !== null)
     {
-        if (Event.target.parentElement.children[i].classList.contains("SearchDropdown"))
-        {
-            ShowElement(Event.target.parentElement.children[i]);
-        }
+        ShowElement(drop);
     }
     if (Event.target.classList.contains("IngredientInputBox") && Event.target.value == "")
     {
-        trueHide();
-    }
-        
+        HideElement(drop);
+    }    
 }
 
 
@@ -79,36 +77,41 @@ function CreatePropertyInputBox()
     inputBox.classList.add("IngredientInputBox")
     inputBox.addEventListener("mousedown", textupdate);
     inputBox.addEventListener("input", textupdate);
+    inputBox.value = "default value";
     return inputBox;
 }
 
-const inputLocation = document.querySelector("#ItemSelector");
+function CreateSearchDropdown()
+{
 
-inputLocation.appendChild(CreatePropertyInputBox());
+    const holder = document.createElement("div");
+    holder.id = "dropdown";
+    holder.classList.add("SearchDropdown")
+    holder.classList.add("structure");
+    
+    const ings = parseIngredients().then(
+    response => {
+    
+        for (let i = 0; i < response.ingredients.length; i++) {
+    
+        const Person = document.createElement("div");
+        Person.innerHTML = response.ingredients[i].name;
+        holder.appendChild(Person);
+        }
+    });
+    return holder;
+}
 
-const holder = document.createElement("div");
-holder.id = "dropdown";
-holder.classList.add("SearchDropdown")
-holder.classList.add("structure");
-
-const ings = parseIngredients().then(
-response => {
-
-    for (let i = 0; i < response.ingredients.length; i++) {
-
-    const Person = document.createElement("div");
-    Person.innerHTML = response.ingredients[i].name;
-    Person.classList.remove("hide");
-    holder.appendChild(Person);
-    }
-});
+function CreateWholeSearchObject(inputLocation)
+{
+    inputLocation.appendChild(CreatePropertyInputBox());
 
 
-inputLocation.appendChild(holder);
+    inputLocation.appendChild(CreateSearchDropdown());
+}
 
+CreateWholeSearchObject(document.querySelector("#ItemSelector"));
+CreateWholeSearchObject(document.querySelector("#ItemSelector2"));
 
-
-document.getElementById("InputBox").value = "Johnny Bravo";
 
 document.addEventListener("mousedown", onDocumentClick);
-
