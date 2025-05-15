@@ -4,9 +4,9 @@
     margin: 0;
     box-sizing: border-box;
   }
-  #Box,
+  #InputBox,
   #content,
-  #inputBox {
+  #ItemSelector {
     display: flex;
     justify-content: center;
     place-self: center;
