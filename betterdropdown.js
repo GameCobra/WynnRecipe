@@ -76,8 +76,8 @@ function CreatePropertyInputBox()
     const inputBox = document.createElement("input");
     inputBox.id = "InputBox";
     inputBox.classList.add("IngredientInputBox")
-    inputBox.addEventListener("mousedown", textupdate);
-    inputBox.addEventListener("input", textupdate);
+    //inputBox.addEventListener("mousedown", textupdate);
+    //inputBox.addEventListener("input", textupdate);
     inputBox.value = "default value";
     return inputBox;
 }
@@ -89,7 +89,8 @@ function CreateSearchDropdown()
     holder.id = "dropdown";
     holder.classList.add("SearchDropdown")
     holder.classList.add("structure");
-    holder.classList.add("hide");
+    holder.classList.add("dropdown")
+    //holder.classList.add("hide");
     
     const ings = parseIngredients().then(
     response => {
@@ -98,6 +99,7 @@ function CreateSearchDropdown()
     
         const Person = document.createElement("div");
         Person.innerHTML = response.ingredients[i].name;
+        Person.classList.add("dropdown")
         holder.appendChild(Person);
         }
     });
@@ -116,4 +118,4 @@ CreateWholeSearchObject(document.querySelector("#ItemSelector"));
 CreateWholeSearchObject(document.querySelector("#ItemSelector2"));
 
 
-document.addEventListener("mousedown", onDocumentClick);
+//document.addEventListener("mousedown", onDocumentClick);

@@ -4,6 +4,19 @@
     margin: 0;
     box-sizing: border-box;
   }
+
+  /* from: https://www.youtube.com/watch?v=Qhaz36TZG5Y*/
+  .dropdown {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #ItemSelector:focus-within .dropdown
+  {
+    opacity: 1;
+    visibility: visible;
+  }
+
   #InputBox,
   #content,
   #ItemSelector,
