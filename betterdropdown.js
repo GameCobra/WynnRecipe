@@ -16,6 +16,7 @@ function GetFirstChildWithClass(element, className)
     return null;
 }
 
+//Will remove an object from existing temporaraly (will move other elements)
 function HideElement(element)
 {
     if (!element.classList.contains("hide")) {
@@ -23,18 +24,19 @@ function HideElement(element)
     }
 }
 
-
+//Adds a removed (hiden) element back into existence
 function ShowElement(element)
 {
     element.classList.remove("hide");
 }
 
-
+//Makes an invisible element visible
 function UnDisapearElement(element)
 {
     element.classList.remove("disapear");
 }
 
+//Makes an element invisible (wont move other elements)
 function DisapearElement(element)
 {
     if (!element.classList.contains("disapear")) {
@@ -44,23 +46,33 @@ function DisapearElement(element)
 
 function textupdate(Event)
 {
+    let noResults = true;
     const dropdownObject = GetFirstChildWithClass(Event.target.parentElement, "SearchDropdown");
-    for (let i = 0; i < dropdownObject.children.length; i++)
+    for (let i = 0; i < dropdownObject.children.length - 1; i++)
     {
         if (dropdownObject.children[i].innerHTML.toLowerCase().includes(Event.target.value.toLowerCase()))
         {
             UnDisapearElement(dropdownObject.children[i]);
+            noResults = false;
         }
         else
         {
             DisapearElement(dropdownObject.children[i]);
         }
     }
+    if (noResults == true)
+    {
+        UnDisapearElement(dropdownObject.children[dropdownObject.children.length - 1]);
+    }
+    else
+    {
+        DisapearElement(dropdownObject.children[dropdownObject.children.length - 1]);
+    }
 }
 
 
 async function parseIngredients() {
-    let response = await fetch('https://gamecobra.github.io/WynnRecipe/ingredients.json');
+    let response = await fetch('https://gamecobra.github.io/WynnRecipe/optimizableProperties.json');
     let data = await response.json(); 
     return data; 
 }
@@ -88,13 +100,18 @@ function CreateSearchDropdown()
     const ings = parseIngredients().then(
     response => {
     
-        for (let i = 0; i < response.ingredients.length; i++) {
+    for (let i = 0; i < response.Properties.length; i++) {
     
-        const Person = document.createElement("div");
-        Person.innerHTML = response.ingredients[i].name;
-        Person.classList.add("dropdown")
-        holder.appendChild(Person);
+        const element = document.createElement("div");
+        element.innerHTML = response.Properties[i][0];
+        element.classList.add("dropdown");
+        holder.appendChild(element);
         }
+        const noResults = document.createElement("div");
+        noResults.innerHTML = "No Results";
+        noResults.classList.add("dropdown");
+        DisapearElement(noResults);
+        holder.appendChild(noResults);
     });
     return holder;
 }
