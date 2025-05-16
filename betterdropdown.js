@@ -44,13 +44,18 @@ function DisapearElement(element)
     }
 }
 
-function textupdate(Event)
+function textupdateInputEvent(Event)
+{
+    textupdate(Event.target);
+}
+
+function textupdate(element)
 {
     let noResults = true;
-    const dropdownObject = GetFirstChildWithClass(Event.target.parentElement, "SearchDropdown");
+    const dropdownObject = GetFirstChildWithClass(element.parentElement, "SearchDropdown");
     for (let i = 0; i < dropdownObject.children.length - 1; i++)
     {
-        if (dropdownObject.children[i].innerHTML.toLowerCase().includes(Event.target.value.toLowerCase()))
+        if (dropdownObject.children[i].innerHTML.toLowerCase().includes(element.value.toLowerCase()))
         {
             UnDisapearElement(dropdownObject.children[i]);
             noResults = false;
@@ -82,7 +87,7 @@ function CreatePropertyInputBox()
     const inputBox = document.createElement("input");
     inputBox.id = "InputBox";
     inputBox.classList.add("IngredientInputBox")
-    inputBox.addEventListener("input", textupdate);
+    inputBox.addEventListener("input", textupdateInputEvent);
     //inputBox.value = "default value";
     inputBox.placeholder = "Enter value";
     return inputBox;
@@ -102,9 +107,10 @@ function CreateSearchDropdown()
     
     for (let i = 0; i < response.Properties.length; i++) {
     
-        const element = document.createElement("div");
+        const element = document.createElement("button");
         element.innerHTML = response.Properties[i][0];
         element.classList.add("dropdown");
+        element.onclick = function(Event) {SearchDropdownElementClicked(Event)};
         holder.appendChild(element);
         }
         const noResults = document.createElement("div");
@@ -114,6 +120,13 @@ function CreateSearchDropdown()
         holder.appendChild(noResults);
     });
     return holder;
+}
+
+function SearchDropdownElementClicked(Event)
+{
+    const inputBox = GetFirstChildWithClass(Event.target.parentElement.parentElement, "IngredientInputBox") 
+    inputBox.value = Event.target.innerHTML;
+    textupdate(inputBox);
 }
 
 function CreateWholeSearchObject(inputLocation)
