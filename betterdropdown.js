@@ -1,4 +1,6 @@
 //Based on: https://medium.com/@kyleducharme/developing-custom-dropdowns-with-vanilla-js-css-in-under-5-minutes-e94a953cee75  
+
+
 function GetFirstChildWithClass(element, className)
 {
     const childrenList = element.children;
@@ -14,29 +16,6 @@ function GetFirstChildWithClass(element, className)
     return null;
 }
 
-const onDocumentClick = (Event) => {
-    //const dropdown = document.getElementById("dropdown");
-    //const clickObject = document.getElementById("InputBox");
-    
-    const collection = document.getElementsByClassName("SearchDropdown");
-    for (let i = 0; i < collection.length; i++)
-    {
-        //hides all collection elements that were not clicked and did not have their input box clicked
-        if (Event.target !== collection[i] && Event.target !== GetFirstChildWithClass(collection[i].parentElement, "IngredientInputBox")) {
-            HideElement(collection[i]);
-        }
-    }
-};
-
-function HideAllSearchDropdowns()
-{
-    const collection = document.getElementsByClassName("SearchDropdown");
-    for (let i = 0; i < collection.length; i++)
-    {
-        HideElement(collection[i]);
-    }
-}
-
 function HideElement(element)
 {
     if (!element.classList.contains("hide")) {
@@ -44,24 +23,39 @@ function HideElement(element)
     }
 }
 
-const ShowElement = (element) => {
+
+function ShowElement(element)
+{
     element.classList.remove("hide");
-};
+}
+
+
+function UnDisapearElement(element)
+{
+    element.classList.remove("disapear");
+}
+
+function DisapearElement(element)
+{
+    if (!element.classList.contains("disapear")) {
+        element.classList.add("disapear");
+    }
+}
 
 function textupdate(Event)
 {
-    //const box = document.getElementById("InputBox");
-    //console.log(Event.target.value);
-    const drop = GetFirstChildWithClass(Event.target.parentElement, "SearchDropdown");
-    console.log(Event.target);
-    if (drop !== null)
+    const dropdownObject = GetFirstChildWithClass(Event.target.parentElement, "SearchDropdown");
+    for (let i = 0; i < dropdownObject.children.length; i++)
     {
-        ShowElement(drop);
+        if (dropdownObject.children[i].innerHTML.toLowerCase().includes(Event.target.value.toLowerCase()))
+        {
+            UnDisapearElement(dropdownObject.children[i]);
+        }
+        else
+        {
+            DisapearElement(dropdownObject.children[i]);
+        }
     }
-    if (Event.target.classList.contains("IngredientInputBox") && Event.target.value == "")
-    {
-        HideElement(drop);
-    }    
 }
 
 
@@ -76,9 +70,9 @@ function CreatePropertyInputBox()
     const inputBox = document.createElement("input");
     inputBox.id = "InputBox";
     inputBox.classList.add("IngredientInputBox")
-    //inputBox.addEventListener("mousedown", textupdate);
-    //inputBox.addEventListener("input", textupdate);
-    inputBox.value = "default value";
+    inputBox.addEventListener("input", textupdate);
+    //inputBox.value = "default value";
+    inputBox.placeholder = "Enter value";
     return inputBox;
 }
 
@@ -90,7 +84,6 @@ function CreateSearchDropdown()
     holder.classList.add("SearchDropdown")
     holder.classList.add("structure");
     holder.classList.add("dropdown")
-    //holder.classList.add("hide");
     
     const ings = parseIngredients().then(
     response => {
@@ -116,6 +109,3 @@ function CreateWholeSearchObject(inputLocation)
 
 CreateWholeSearchObject(document.querySelector("#ItemSelector"));
 CreateWholeSearchObject(document.querySelector("#ItemSelector2"));
-
-
-//document.addEventListener("mousedown", onDocumentClick);
