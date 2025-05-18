@@ -20,7 +20,7 @@ function GetFirstChildWithClass(element, className)
 function HideElement(element)
 {
     if (!element.classList.contains("hide")) {
-        element.classList.add("hide");
+        element.classList.add("hide"); //Hide CSS element removes object from affecting elements
     }
 }
 
@@ -30,42 +30,46 @@ function ShowElement(element)
     element.classList.remove("hide");
 }
 
-//Makes an invisible element visible
-function UnDisapearElement(element)
-{
-    element.classList.remove("disapear");
-}
-
 //Makes an element invisible (wont move other elements)
 function DisapearElement(element)
 {
     if (!element.classList.contains("disapear")) {
-        element.classList.add("disapear");
+        element.classList.add("disapear"); //Disapear CSS element removes an object from being displayed
     }
 }
 
-function textupdateInputEvent(Event)
+//Makes an invisible element visible
+function UnDisapearElement(element)
 {
-    textupdate(Event.target);
+    element.classList.remove("disapear"); 
 }
 
-function textupdate(element)
+//Update search element requires an HTML element input to be compatable with being called from other functions
+//But input needs an event object if you want the target
+//This function just converts the event element to target and calls the appropriet function
+function UpdateSearchElementsEventInput(Event)
 {
-    let noResults = true;
+    UpdateSearchElements(Event.target);
+}
+
+//Removes elements from the search autocomleat dropdown based on the current text in the search box
+function UpdateSearchElements(element)
+{
+    let numOfResults = 0;
     const dropdownObject = GetFirstChildWithClass(element.parentElement, "SearchDropdown");
     for (let i = 0; i < dropdownObject.children.length - 1; i++)
     {
         if (dropdownObject.children[i].innerHTML.toLowerCase().includes(element.value.toLowerCase()))
         {
             UnDisapearElement(dropdownObject.children[i]);
-            noResults = false;
+            numOfResults += 1;
         }
         else
         {
             DisapearElement(dropdownObject.children[i]);
         }
     }
-    if (noResults == true)
+    if (numOfResults == 0)
     {
         UnDisapearElement(dropdownObject.children[dropdownObject.children.length - 1]);
     }
@@ -73,10 +77,13 @@ function textupdate(element)
     {
         DisapearElement(dropdownObject.children[dropdownObject.children.length - 1]);
     }
+    var rootCSS = document.querySelector(':root');
+    rootCSS.style.setProperty("--dropdownDisplaySize", Math.min(200, 60 * Math.max(1, numOfResults)) + "px");
 }
 
-
-async function parseIngredients() {
+//Webpage causes error if directly trying to get the JSOn from its local files, so will just directly pull it with this instead
+//Should work identicaly when viewed on github
+async function GetItemProperties() {
     let response = await fetch('https://gamecobra.github.io/WynnRecipe/optimizableProperties.json');
     let data = await response.json(); 
     return data; 
@@ -87,10 +94,31 @@ function CreatePropertyInputBox()
     const inputBox = document.createElement("input");
     inputBox.id = "InputBox";
     inputBox.classList.add("IngredientInputBox")
-    inputBox.addEventListener("input", textupdateInputEvent);
+    inputBox.addEventListener("input", UpdateSearchElementsEventInput);
     //inputBox.value = "default value";
     inputBox.placeholder = "Enter value";
     return inputBox;
+}
+
+function AddPropertyElementsToDropDown(holderElement)
+{
+    const ings = GetItemProperties().then(
+    response => {
+    
+    for (let i = 0; i < response.Properties.length; i++) {
+    
+        const element = document.createElement("button");
+        element.innerHTML = response.Properties[i][0];
+        element.classList.add("dropdown");
+        element.onclick = function(Event) {SearchDropdownElementClicked(Event)};
+        holderElement.appendChild(element);
+        }
+        const noResults = document.createElement("button");
+        noResults.innerHTML = "No Results";
+        noResults.classList.add("dropdown");
+        DisapearElement(noResults);
+        holderElement.appendChild(noResults);
+    });
 }
 
 function CreateSearchDropdown()
@@ -100,25 +128,9 @@ function CreateSearchDropdown()
     holder.id = "dropdown";
     holder.classList.add("SearchDropdown")
     holder.classList.add("structure");
-    holder.classList.add("dropdown")
+    holder.classList.add("dropdown");
     
-    const ings = parseIngredients().then(
-    response => {
-    
-    for (let i = 0; i < response.Properties.length; i++) {
-    
-        const element = document.createElement("button");
-        element.innerHTML = response.Properties[i][0];
-        element.classList.add("dropdown");
-        element.onclick = function(Event) {SearchDropdownElementClicked(Event)};
-        holder.appendChild(element);
-        }
-        const noResults = document.createElement("div");
-        noResults.innerHTML = "No Results";
-        noResults.classList.add("dropdown");
-        DisapearElement(noResults);
-        holder.appendChild(noResults);
-    });
+    AddPropertyElementsToDropDown(holder);
     return holder;
 }
 
@@ -126,7 +138,7 @@ function SearchDropdownElementClicked(Event)
 {
     const inputBox = GetFirstChildWithClass(Event.target.parentElement.parentElement, "IngredientInputBox") 
     inputBox.value = Event.target.innerHTML;
-    textupdate(inputBox);
+    UpdateSearchElements(inputBox);
 }
 
 function CreateWholeSearchObject(inputLocation)
