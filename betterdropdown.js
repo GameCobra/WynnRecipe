@@ -50,6 +50,7 @@ function UnDisapearElement(element)
 function UpdateSearchElementsEventInput(Event)
 {
     UpdateSearchElements(Event.target);
+    console.log("update")
 }
 
 //Removes elements from the search autocomleat dropdown based on the current text in the search box
@@ -95,6 +96,7 @@ function CreatePropertyInputBox()
     inputBox.id = "InputBox";
     inputBox.classList.add("IngredientInputBox")
     inputBox.addEventListener("input", UpdateSearchElementsEventInput);
+    inputBox.addEventListener("click", UpdateSearchElementsEventInput);
     //inputBox.value = "default value";
     inputBox.placeholder = "Enter value";
     return inputBox;
