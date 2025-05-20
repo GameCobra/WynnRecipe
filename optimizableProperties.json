@@ -1,13 +1,13 @@
 {
     "Properties": [
-        ["Durrability", "durrability"],
+        ["Durability", "durrability"],
         ["Bonus Strength", "str"],
-        ["Bonus Intelegence", "int"],
+        ["Bonus Intelligence", "int"],
         ["Bonus Agility", "agi"],
         ["Bonus Defence", "def"],
         ["Bonus Dexterity", "dex"],
         ["Strength Requirerment", "strReq"],
-        ["Intelegence Requirerment", "intReq"],
+        ["Intelligence Requirerment", "intReq"],
         ["Agility Requirerment", "agiReq"],
         ["Defence Requirerment", "defReq"],
         ["Dexterity Requirerment", "dexReq"],

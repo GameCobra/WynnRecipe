@@ -50,7 +50,6 @@ function UnDisapearElement(element)
 function UpdateSearchElementsEventInput(Event)
 {
     UpdateSearchElements(Event.target);
-    console.log("update")
 }
 
 //Removes elements from the search autocomleat dropdown based on the current text in the search box
@@ -78,8 +77,7 @@ function UpdateSearchElements(element)
     {
         DisapearElement(dropdownObject.children[dropdownObject.children.length - 1]);
     }
-    var rootCSS = document.querySelector(':root');
-    rootCSS.style.setProperty("--dropdownDisplaySize", Math.min(200, 60 * Math.max(1, numOfResults)) + "px");
+    dropdownObject.style.setProperty("--dropdownDisplaySize", Math.min(200, 60 * Math.max(1, numOfResults)) + 10 + "px");
 }
 
 //Webpage causes error if directly trying to get the JSOn from its local files, so will just directly pull it with this instead
@@ -145,6 +143,7 @@ function SearchDropdownElementClicked(Event)
 
 function CreateWholeSearchObject(inputLocation)
 {
+    inputLocation.classList.add("ItemSelectorHolder")
     inputLocation.appendChild(CreatePropertyInputBox());
 
 

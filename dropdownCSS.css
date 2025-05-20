@@ -6,7 +6,6 @@
   }
 
   :root {
-    --dropdownDisplaySize: 200px;
     --accualDropdownSize: 50px;
   }
 
@@ -23,8 +22,8 @@
   } 
 
   .IngredientInputBox,
-  #ItemSelector,
-  #ItemSelector2 {
+  .ItemSelectorHolder
+    {
     display: flex;
     justify-content: center;
     place-self: center;
@@ -65,6 +64,7 @@
   /* Dropdown styling */
   
   .structure {
+    --dropdownDisplaySize: 200px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
