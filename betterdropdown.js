@@ -93,7 +93,7 @@ async function GetItemProperties() {
 function CreatePropertyInputBox()
 {
     const inputBox = document.createElement("input");
-    inputBox.id = "InputBox";
+    //inputBox.id = "InputBox";
     inputBox.classList.add("IngredientInputBox")
     inputBox.addEventListener("input", UpdateSearchElementsEventInput);
     inputBox.addEventListener("click", UpdateSearchElementsEventInput);

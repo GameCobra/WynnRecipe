@@ -22,8 +22,7 @@
     visibility: visible;
   } 
 
-  #InputBox,
-  #content,
+  .IngredientInputBox,
   #ItemSelector,
   #ItemSelector2 {
     display: flex;
