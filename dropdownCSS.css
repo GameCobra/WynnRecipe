@@ -15,7 +15,7 @@
     visibility: hidden;
   }
 
-  #ItemSelector:focus-within .dropdown, #ItemSelector2:focus-within .dropdown
+  .ItemSelector:focus-within .dropdown, .ItemSelector:focus-within .dropdown
   {
     opacity: 1;
     visibility: visible;

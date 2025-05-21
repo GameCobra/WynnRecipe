@@ -150,5 +150,11 @@ function CreateWholeSearchObject(inputLocation)
     inputLocation.appendChild(CreateSearchDropdown());
 }
 
-CreateWholeSearchObject(document.querySelector("#ItemSelector"));
-CreateWholeSearchObject(document.querySelector("#ItemSelector2"));
+const makeItem = document.getElementsByClassName("ItemSelector");
+
+for (let i = 0; i < makeItem.length; i++)
+{
+    CreateWholeSearchObject(makeItem[i]);    
+}
+//CreateWholeSearchObject(document.querySelector("#ItemSelector"));
+//CreateWholeSearchObject(document.querySelector("#ItemSelector2"));
